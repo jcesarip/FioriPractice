@@ -1,0 +1,21 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog id="idDialog" title="Info" type="Message">
+
+<content>
+ <Text c:require="{formatMessage: 'sap/base/strings/formatMessage'}"
+ text="{
+ 	parts :[
+	{path:'i18n>dialogText'},
+	{path:'customer>/CustomerName'}
+	], formatter:'formatMessage'}"></Text>
+</content>
+<beginButton>
+    <Button text="Ok" press=".onOkCloseDialogButton"></Button>
+</beginButton>
+   
+</Dialog>
+
+</c:FragmentDefinition>

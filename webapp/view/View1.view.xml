@@ -1,0 +1,168 @@
+<mvc:View controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:c="sap.ui.core" c:require="{formatter: 'project1/model/formatter'}"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>overviewPageTitle}" showNavButton="true">
+        <content>
+            <Panel headerText="{i18n>customerPanelHeader}" expanded="{device>/system/desktop}" expandable="{=!${device>/system/desktop}}" >
+                <content>
+                    <f:SimpleForm layout="ColumnLayout" editable="true" width="auto">
+                        <f:toolbar>
+                            <Toolbar>
+
+                                <content>
+                                    <ToolbarSpacer/>
+                                    <Button icon="sap-icon://user" text="Boton - Saludar" press=".onPressSayHello"/>
+                                    <Button icon="sap-icon://create" text="{i18n>newCustomerButtonText}" 
+                                    press=".onPressCreateCustom" enabled="{= ${customer>/CustomerName} !== undefined &amp;&amp; ${customer>/CustomerName}.length > 0}"/>
+                                </content>
+                            </Toolbar>
+                        </f:toolbar>
+                        <f:content>
+                            <c:Title text="{i18n>generalDataFormContainerTitle}"/>
+                            <Label text="{i18n>formLabelText}"/>
+                            <Input value="{customer>/form}"/>
+                            <Label text="{i18n>nameLabelText}"/>
+                            <Input value="{customer>/CustomerName}" valueLiveUpdate="true"/>
+                            <Label text="{i18n>discountLabelText}"/>
+                            <Input value="{path : 'customer>/Discount',
+                            type:'sap.ui.model.type.Integer',
+                            constraints:{minimum: 0, maximum:100}}"/>
+                            <c:Title text="{i18n>addressDataFormContainerTitle}"/>
+                            <Label text="{i18n>streetLabelText}"/>
+                            <Input value="{customer>/Street}"/>
+                            <Label text="{i18n>postcodeLabelText}"/>
+                            <Input value="{customer>/PostCode}"/>
+                            <Label text="{i18n>cityLabelText}"/>
+                            <Input value="{customer>/City}"/>
+                            <Label text="{i18n>countryLabelText}"/>
+                            <Input value="{customer>/Country}"/>
+                            <c:Title text="{i18n>contactDataFormContainerTitle}"/>
+                            <Label text="{i18n>emailLabelText}"/>
+                            <Input value="{customer>/Email}"/>
+                            <Label text="{i18n>phoneLabelText}"/>
+                            <Input value="{customer>/Phone}"/>
+                        </f:content>
+                        <f:title>
+                        </f:title>
+
+                    </f:SimpleForm>
+                </content>
+            </Panel>
+            
+            <Table id="idCustomerTable" growing="true" growingThreshold="5" class="sapUiResponsiveMargin" 
+            width="auto" items="{
+                    path: '/Customers',
+                    sorter: [
+                        {path: 'City', group: true},
+                        {path: 'CustomerName'} ]
+                    }" mode="SingleSelectLeft" selectionChange=".onCustomerChange">
+
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="{i18n>customerTableHeader}"/>
+                    <ToolbarSpacer/>
+                    <SearchField width="40%" search=".onFilterCustomers"/>
+                </Toolbar>
+            </headerToolbar>
+                <columns>
+                    <Column>
+                        <header>
+                            <Text text="{i18n>nameLabelText}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>streetLabelText}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>postcodeLabelText}"></Text>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Text text="{i18n>cityLabelText}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Tablet">
+                        <header>
+                            <Text text="{i18n>countryLabelText}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <header>
+                            <Text text="{i18n>emailLabelText}"></Text>
+                        </header>
+                    </Column>
+
+
+                </columns>
+                <ColumnListItem >
+                    <cells>
+                        <ObjectIdentifier title="{CustomerName}"/>
+                        <Text text="{Street}"/>
+                        <Text text="{PostCode}"/>
+                        <Text text="{City}"/>
+                        <Text text="{Country}"/>
+                        <Text text="{Email}"/>
+                    </cells>
+                </ColumnListItem>
+            </Table>
+            <Table id="idBookingsTable" headerText="{i18n>bookingTableHeader}" growing="true" growingThreshold="5" 
+            class="sapUiResponsiveMargin" width="auto" items="{_Bookings}">
+                <columns>
+                    <Column>
+                        <header>
+                            <Text text="{i18n>airlineColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Text text="{i18n>connectionColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Text text="{i18n>fldateColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true">
+                        <header>
+                            <Text text="{i18n>classColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <header>
+                            <Text text="{i18n>paymentColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <header>
+                            <Text text="{i18n>cancellationColumnHeader}"></Text>
+                        </header>
+                    </Column>
+                </columns>
+                <ColumnListItem >
+                    <cells>
+                        <ObjectIdentifier title="{AirlineID}"/>
+                        <ObjectIdentifier title="{ConnectionNumber}"/>
+                        <ObjectIdentifier title="{path: 'FlightDate', type: 'sap.ui.model.type.Date',
+                       formatOptions: {
+                                source: {pattern: 'yyyy-MM-dd'},
+                                style: 'medium'
+                                }
+                            }"/>
+                        <Text text="{path:'Class', formatter:'formatter.classText'}"/>
+                        <ObjectNumber number="{parts:[{path:'ForeignCurrencyPayment'}, {path:'ForeignCurrency'}],
+                        type:'sap.ui.model.type.Currency',
+                        formatOptions:{showMeasure: false}}" unit="{ForeignCurrency}"/>
+                        <c:Icon src="{= ${IsCancelled} === 'X' ? 'sap-icon://cancel' : 'sap-icon://accept'}" tooltip="{= ${IsCancelled} === 'X' ? ${i18n>cancelledTooltip} : ${i18n>notCancelledTooltip}}"></c:Icon>
+                    </cells>
+                </ColumnListItem>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
