@@ -9,10 +9,10 @@ sap.ui.define([
     return {
         init: function () {
             const oMockServer = new MockSever({
-                rootUri: "/"
+                rootUri: "/sap/opu/odata4/sap/ux_ui_customer_o4/srvd/sap/ux_ui_customer/0001/"
             });
-            oMockServer.simulate("../localService/metadata.xml", {
-                sMockdataBaseUrl: "../localService/mockdata",
+            oMockServer.simulate("../../localService/metadata.xml", {
+                sMockdataBaseUrl: "../../localService/mockdata",
                 bGenerateMissingMockData: true
             });
             oMockServer.start();

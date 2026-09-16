@@ -53,7 +53,7 @@
             
             <Table id="idCustomerTable" growing="true" growingThreshold="5" class="sapUiResponsiveMargin" 
             width="auto" items="{
-                    path: '/Customers',
+                    path: '/UX_Customer',
                     sorter: [
                         {path: 'City', group: true},
                         {path: 'CustomerName'} ]
