@@ -18,7 +18,7 @@
   "scripts": {
     "start": "fiori run --open \"test/flp.html#app-preview\"",
     "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flp.html#app-preview\"",
-    "start-mock": "ui5 serve -o /test/mockServer.html",
+    "start-mock": "fiori run --config ./ui5-mock.yaml --open \"index.html?sap-client=100&sap-ui-xx-viewCache=false\"",
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "lint": "eslint ./",
     "deploy": "fiori verify",
