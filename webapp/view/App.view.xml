@@ -4,8 +4,7 @@
     xmlns="sap.m">
     <Shell >
     <App id="app">
-    <pages>
-    </pages>
+  
     </App>
     </Shell>
 </mvc:View>

@@ -14,8 +14,10 @@
                                 <content>
                                     <ToolbarSpacer/>
                                     <Button icon="sap-icon://user" text="Boton - Saludar" press=".onPressSayHello"/>
-                                    <Button icon="sap-icon://create" text="{i18n>newCustomerButtonText}" 
+                                    <Button icon="sap-icon://create" text="CrearCliente" 
                                     press=".onPressCreateCustom" enabled="{= ${customer>/CustomerName} !== undefined &amp;&amp; ${customer>/CustomerName}.length > 0}"/>
+                                    <Button icon="sap-icon://create" text="{i18n>newCustomerButtonText}" 
+                                    press=".onSaveCreateCustom" enabled="{= ${customer>/CustomerName} !== undefined &amp;&amp; ${customer>/CustomerName}.length > 0}"/>
                                 </content>
                             </Toolbar>
                         </f:toolbar>
@@ -64,6 +66,8 @@
                     <Title text="{i18n>customerTableHeader}"/>
                     <ToolbarSpacer/>
                     <SearchField width="40%" search=".onFilterCustomers"/>
+                    <Button press=".ongotosecondpage" text="Ir a Details"></Button>
+                
                 </Toolbar>
             </headerToolbar>
                 <columns>
@@ -100,7 +104,7 @@
 
 
                 </columns>
-                <ColumnListItem >
+                <ColumnListItem id="idCustomerColumnListItem" type="Navigation" press=".onNavToDetails">
                     <cells>
                         <ObjectIdentifier title="{CustomerName}"/>
                         <Text text="{Street}"/>

@@ -1,0 +1,14 @@
+<mvc:View
+	controllerName="project1.controller.NotFound"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+<IllustratedMessage title="NotFound">
+	<additionalContent>
+						<Button text="{i18n>navToOverviewLinkText}" press=".onShowOverviewPageButtonPress"/>
+					</additionalContent>
+</IllustratedMessage>
+</mvc:View>
